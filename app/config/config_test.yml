@@ -5,3 +5,6 @@ doctrine:
       default:
         driver:   pdo_sqlite
         path:     "%kernel.cache_dir%/test.db"
+
+nelmio_alice:
+    locale: 'fr_FR'

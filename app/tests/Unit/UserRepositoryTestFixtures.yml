@@ -1,0 +1,15 @@
+App\Entity\User:
+  tekyn:
+    firstName: "Cyril"
+    lastName: "Tekyn"
+    age: 30
+    city: "Paris"
+    createdAt: '<dateTime()>'
+
+  user{1..10}:
+    firstName: '<firstName()>'
+    lastName: '<lastName()>'
+    age: '<randomNumber(2)>'
+    city: '<city()>'
+    createdAt: '<dateTime()>'
+    updatedAt: '30%? <dateTime()>'
