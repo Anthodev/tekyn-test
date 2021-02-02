@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\UserRepository;
@@ -11,41 +13,55 @@ use Doctrine\ORM\Mapping as ORM;
 class User
 {
     /**
+     * @var int|null
+     * 
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
+     * @var string
+     * 
      * @ORM\Column(type="string", length=255)
      */
-    private $firstName;
+    private string $firstName;
 
     /**
+     * @var string
+     * 
      * @ORM\Column(type="string", length=255)
      */
-    private $lastName;
+    private string $lastName;
 
     /**
+     * @var int
+     * 
      * @ORM\Column(type="integer")
      */
-    private $age;
+    private int $age;
 
     /**
+     * @var string
+     * 
      * @ORM\Column(type="string", length=255)
      */
-    private $city;
+    private string $city;
 
     /**
+     * @var \DateTimeInterface
+     * 
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private \DateTimeInterface $createdAt;
 
     /**
+     * @var ?\DateTimeInterface
+     * 
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private ?\DateTimeInterface $updatedAt;
 
     public function getId(): ?int
     {
