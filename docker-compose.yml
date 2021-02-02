@@ -1,0 +1,65 @@
+version: "3"
+
+services:
+  app:
+    image: thecodingmachine/php:7.4-v4-fpm
+    container_name: "${PROJECT_NAME}-php"
+    depends_on:
+      - db
+    volumes:
+      - ./app:/var/www/html:rw,cached
+    environment:
+      APP_ENV: "${APP_DEV}"
+      DATABASE_URL: "mysql://root:${DB_ROOT_PWD}@${PROJECT_NAME}-db:3306/${DB_NAME}?serverVersion=10.5"
+      PHP_EXTENSIONS: "gd intl xdebug sqlite3"
+      PHP_INI_MEMORY_LIMIT: -1
+      # PHP_EXTENSION_XDEBUG: 1
+      # PHP_INI_XDEBUG__REMOTE_AUTOSTART: 1
+
+      STARTUP_COMMAND_1: composer install
+      STARTUP_COMMAND_2: echo 'alias sf="php bin/console"' >> ~/.bashrc
+      STARTUP_COMMAND_3: echo 'alias phpunit="php vendor/bin/simple-phpunit"' >> ~/.bashrc
+    restart: unless-stopped
+
+  caddy:
+    image: caddy
+    container_name: "${PROJECT_NAME}-caddy"
+    volumes:
+      - ./app:/var/www/html:ro
+      - ./app/docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      PROJECT_NAME: ${PROJECT_NAME}
+      PROJECT_HOST: ${PROJECT_HOST}
+    ports:
+      # HTTP
+      - target: 80
+        published: 80
+        protocol: tcp
+      # HTTPS
+      - target: 443
+        published: 443
+        protocol: tcp
+      # HTTP/3
+      - target: 443
+        published: 443
+        protocol: udp
+    restart: unless-stopped
+
+  db:
+    image: mariadb
+    container_name: "${PROJECT_NAME}-db"
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PWD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PWD}
+    volumes:
+      - ./app/docker/db/data:/var/lib/mysql:rw
+    restart: unless-stopped
+
+volumes:
+  db_data:
+  caddy_data:
+  caddy_config:
