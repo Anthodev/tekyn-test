@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Repository;
 
 use App\Entity\User;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger as DoctrineOrmPurger;
 use Doctrine\Persistence\ManagerRegistry;
 use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger as DoctrineOrmPurger;
 
 class UserRepositoryTest extends KernelTestCase
 {

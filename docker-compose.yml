@@ -8,6 +8,8 @@ services:
       - db
     volumes:
       - ./app:/var/www/html:rw,cached
+    extra_hosts:
+      - "tekyn.localhost:172.20.0.3"
     environment:
       APP_ENV: "${APP_DEV}"
       DATABASE_URL: "mysql://root:${DB_ROOT_PWD}@${PROJECT_NAME}-db:3306/${DB_NAME}?serverVersion=10.5"

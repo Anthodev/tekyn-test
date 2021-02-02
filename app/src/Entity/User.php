@@ -14,7 +14,7 @@ class User
 {
     /**
      * @var int|null
-     * 
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -23,42 +23,42 @@ class User
 
     /**
      * @var string
-     * 
+     *
      * @ORM\Column(type="string", length=255)
      */
     private string $firstName;
 
     /**
      * @var string
-     * 
+     *
      * @ORM\Column(type="string", length=255)
      */
     private string $lastName;
 
     /**
      * @var int
-     * 
+     *
      * @ORM\Column(type="integer")
      */
     private int $age;
 
     /**
      * @var string
-     * 
+     *
      * @ORM\Column(type="string", length=255)
      */
     private string $city;
 
     /**
      * @var \DateTimeInterface
-     * 
+     *
      * @ORM\Column(type="datetime")
      */
     private \DateTimeInterface $createdAt;
 
     /**
      * @var ?\DateTimeInterface
-     * 
+     *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $updatedAt;
