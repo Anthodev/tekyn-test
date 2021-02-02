@@ -1,65 +1,43 @@
-# Caker
-Caker is a Symfony development stack with the following docker configuration:
-- Caddy v2 as a web server and reverse-proxy
-- A PostgreSQL database
-- A PHP (8.0.*) container based on the [thecodingmachine PHP image](https://github.com/thecodingmachine/docker-images-php) with these additionnal plugins enabled:
-    - pgsql
-    - pdo_pgsql
-    - intl
-    - gd
+# Tekyn test
 
-For the Symfony environment, here is the configuration :
-- PHP 8.0.* (with unlimited PHP memory configured)
-- Symfony 5.2.*
-- PHPUnit 9.5.*
-- PHPStan (on level 5) with the following packages (and pre-configured):
-    - extension-installer
-    - phpstan-doctrine
-    - phpstan-phpunit
-    - phpstan-symfony
-- ECS (easy-coding-standard) which include PHPCS and PHP CS Fixer with the following rules:
-    - CLEAN_CODE
-    - PSR-12
-    - DOCTRINE_ANNOTATIONS
+Nous attendons de toi que tu délivres une API permettant les opérations suivantes : 
 
-## Getting started
-Before the first run, you must create a `.env` file at the root of the project (you can copy paste the `.env.dist` file and rename it) and fill the requested values.
-## Usage
-To launch the stack, you only need to enter the following command in the folder in your terminal:
-```bash
-docker-compose -f ./docker-compose.yml up -d 
-```
+ * La création des entités doctrine suivant le MCD joint.
 
-To stop it, you can simply run the appropriate command:
-```bash
-docker-compose -f ./docker-compose.yml stop 
-```
+Tu dois implémenter les 4 grandes opérations du CRUD, à savoir
 
-## Aliases
-Several commands have been preconfigured on the PHP container:
-- `sf` replace `php bin/console` (the symfony console command)
-- `phpunit` replace `php vendor/bin/simple-phpunit`
+ * Récupération d'un utilisateur
+ * Création d'un utilisateur
+ * Modification de l'intégralité de l'utilisateur
+ * Modification du nom et/ou prénom et/ou age et/ou ville de l'utilisateur
+ * Suppression de l'utilisateur
 
-## Check coding standard
-As stated above, a full suite of coding standards (CLEAN_CODE, PSR-12, DOCTRINE_ANNOTATIONS) has been configured in the PHP container. To use them you have the following commands:
-- `phpstan analyse`
-- `ecs check` to check the coding standards errors
-- `ecs check --fix` to fix the errors above
+Attention : Le résultat attendu est une API, ne perd pas de temps avec du front, HTML ou Twig.
 
-## Recommended VSCode extensions
-This is a list of extensions that works very well with this stack:
-- [PHPStan](https://marketplace.visualstudio.com/items?itemName=swordev.phpstan)
+## Attendu
 
-## Others recommended VSCode extensions
-- [indent-rainbow](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow)
-- [Bracket Pair Colorizer 2](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2)
-- [Better Comments](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
-- [PHP Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)
-- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
-- [PHP DocBlocker](https://marketplace.visualstudio.com/items?itemName=neilbrayfield.php-docblocker)
-- [PHP Namespace Resolver](https://marketplace.visualstudio.com/items?itemName=MehediDracula.php-namespace-resolver)
-- [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)
+ * Un fichier README.md avec les explications comment exécuter ton projet
+ * Le code de ton projet rendu sur le support de ton choix (mail, github, etc.)
+ * Tout ce que tu as utilisé pour mener à bien ton test (URL, commandes php ou symfony, Dockerfile, makefile, etc.)
 
-## Upcoming
-- Add Vulcain support
-- Add Mercure support
+## Contraintes
+
+ * Tu peux utiliser la version Symfony de ton choix, entre les version 3.4 et 5.2
+ * Les versions de PHP autorisées sont les version >= 7.3
+
+## Bonus (Pas de pénalisation si ce n'est pas fait)
+
+ * Créer l'API doc correspondante au format nelmio/swagger
+ * Ecrire les tests unitaires correspondants aux différentes opérations
+     * TDD ou tests unitaires écrit par la suite, à toi de décider, précise juste la méthode utilisée
+ * Utilisation des validators Symfony et/ou des forms Symfony
+ * Ajout de log
+ * Dockerfile ou docker-compose.yml permettant de monter la stack
+
+## Critères de notation
+
+ * Nous étudierons l'implémentation de ta solution selon les standards PHP et Symfony
+ * Le nombre de bugs détectés
+ * L'implémentation des entités Doctrine
+ * Optimisation des requêtes et structure de base de données
+ * La documentation de ton projet (PHPDoc, etc.)
