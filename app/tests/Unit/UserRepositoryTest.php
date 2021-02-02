@@ -38,4 +38,28 @@ class UserRepositoryTest extends KernelTestCase
 
         $this->assertNotEmpty($user);
     }
+
+    public function testVerifyAUserData(): void
+    {
+        $this->loadDb();
+
+        $user = $this->doctrine->getRepository(User::class)->findOneBy(['lastName' => 'Tekyn']);
+
+        $this->assertSame('Cyril', $user->getFirstName());
+        $this->assertSame('Tekyn', $user->getLastName());
+        $this->assertSame(30, $user->getAge());
+        $this->assertSame('Paris', $user->getCity());
+        $this->assertEquals(new \DateTime() instanceof \DateTime, $user->getCreatedAt() instanceof \DateTime);
+        $this->assertEquals(new \DateTime() instanceof \DateTime, $user->getUpdatedAt() instanceof \DateTime);
+
+        $this->tearDown();
+    }
+
+    public function tearDown(): void
+    {
+        $purger = new DoctrineOrmPurger($this->doctrine->getManager());
+        $purger->purge();
+
+        self::$kernel->shutdown();
+    }
 }
